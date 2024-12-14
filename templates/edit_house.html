@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="g-12 col-sm-12 col-md-10 col-lg-10">
+    
+    <h2 class="mb-4 text-center" style="padding-top: 10px;">Edit House Details</h2>
+    <form class="row g-3 " method="POST" action="{{ url_for('edit_house', house_id=house['_id']) }}">
+        
+        <div class="col-md-3">
+            <label for="house_number" class="form-label">House Number</label>
+            <input type="text" id="house_number" autocomplete="off" name="house_number" class="form-control" value="{{ house['house number'] }}" required>
+        </div>
+        <div class="col-md-3">
+            <label for="family_type" class="form-label">Family Type</label>
+            <select id="family_type" name="family_type" class="form-control" required>
+                {% for option in family_type_options %}
+                    <option value="{{ option }}" {% if house['family type'] == option %}selected{% endif %}>
+                        {{ option }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="house_type" class="form-label">Type of House</label>
+            <select id="house_type" name="house_type" class="form-control" required>
+                {% for option in house_type %}
+                    <option value="{{ option }}" {% if house['type of house'] == option %}selected{% endif %}>
+                        {{ option }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="land_size" class="form-label">House Land Size</label>
+            <select id="land_size" name="land_size" class="form-control" required>
+                {% for option in land_size %}
+                    <option value="{{ option }}" {% if house['house land size'] == option %}selected{% endif %}>
+                        {{ option }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4">
+           <label for="monthly_family_income" class="form-label">Monthly Family Income(in LKR)</label>
+            <input type="number" id="monthly_family_income" name="monthly_family_income" autocomplete="off" class="form-control" value="{{ house['monthly family income'] }}" required>
+        </div>
+        <div class="col-md-4">
+            <label for="monthly_family_expenditure" class="form-label">Monthly Family Expenditure(in LKR)</label>
+            <input type="number" id="monthly_family_expenditure" name="monthly_family_expenditure" autocomplete="off" class="form-control" value="{{ house['monthly family expenditure'] }}" required>
+        </div>
+        <div class="col-md-4">
+            <label for="electricity_consumption" class="form-label">Electricity Consumption(Avg of 5 months)</label>
+            <input type="number" id="electricity_consumption" name="electricity_consumption" autocomplete="off" class="form-control" value="{{ house['average monthly electricity consumption'] }}" required>
+        </div>
+        <div class="col-md-4">
+            <label for="house_ownership" class="form-label">Ownership of the Resident House</label>
+            <input type="text" id="house_ownership" name="house_ownership"  autocomplete="off"  class="form-control" value="{{ house['ownership of the resident house'] }}" required>
+        </div>
+        <div class="col-md-4">
+            <label for="total_vehicles" class="form-label">Number of Vehicals in the House</label>
+            <input type="number" id="total_vehicles" name="total_vehicles"  autocomplete="off" class="form-control" value="{{ house['total vehicles of house owner'] }}" required>
+        </div>
+        <div class="col-md-4">
+            <label for="total_paddy_lands" class="form-label">Total Paddy Lands (in acre)</label>
+            <input type="number" id="total_paddy_lands" name="total_paddy_lands" step="0.10" autocomplete="off" class="form-control" value="{{ house['total paddy lands of house owner (in acre)'] }}" required>
+        </div>
+        <div class="col-md-3">
+            <label for="source_of_water" class="form-label">Soure of Watter</label>
+            <select id="source_of_water" name="source_of_water" class="form-control" required>
+                {% for option in water_source %}
+                    <option value="{{ option }}" {% if house['source of water'] == option %}selected{% endif %}>
+                        {{ option }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="electricity" class="form-label">Electricity</label>
+            <select id="electricity" name="electricity" class="form-control" required>
+                {% for option in electricity %}
+                    <option value="{{ option }}" {% if house['electricity'] == option %}selected{% endif %}>
+                        {{ option }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="machineries" class="form-label">Total Machineries in House</label>
+            <input type="number" id="machineries" name="machineries" class="form-control" autocomplete="off" value="{{ house['Total Machineries'] }}" required>
+        </div>
+        <div class="col-md-3">
+            <label for="toilet" class="form-label">Toilet</label>
+            <select id="toilet" name="toilet" class="form-control" required>
+                {% for option in toilet %}
+                    <option value="{{ option }}" {% if house['toilet'] == option %}selected{% endif %}>
+                        {{ option }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="remark" class="form-label">Remark</label>
+            <textarea  id="remark" name="remark" class="form-control">{{ house['remark'] }}</textarea>
+        </div>
+        
+        <div>
+            <button type="submit" class="btn btn-primary" >Save Changes</button>
+            <a onclick="goBack()" class="btn btn-secondary">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

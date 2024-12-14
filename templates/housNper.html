@@ -1,0 +1,157 @@
+{% extends "base.html" %} {% block content %} {% include 'userinput.html' %}
+
+<div class="p-4 ps-0 container-fluid pl-1 pr-1">
+  <div class="container data-view">
+    <div class="row justify-content-start align-items-start g-2 mt-2">
+      <div class="col">
+        <div class="data-set card">
+          <div class="card-body">
+            <h4 class="card-title">House Details</h4>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th scope="row" class="upper">HOUSE NUMBER</th>
+                  <td>{{ houseData["house number"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="upper">Ownership of the house</th>
+                  <td>{{ houseData["ownership of the resident house"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="upper">Type of House</th>
+                  <td>{{ houseData["type of house"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="upper">Family Type</th>
+                  <td>{{ houseData["family type"] }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="data-set card">
+          <div class="card-body">
+            <h4 class="card-title">Economic Level</h4>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th scope="row" class="upper">Monthly Income of the House</th>
+                  <td>{{ houseData["monthly family income"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="upper">
+                    Monthly Expenditure of the House
+                  </th>
+                  <td>{{ houseData["monthly family expenditure"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="upper">
+                    Monthly Electricity Consumption(Average)
+                  </th>
+                  <td>
+                    {{ houseData["average monthly electricity consumption"] }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-start align-items-start g-2 mt-2">
+        <div class="col">
+          <div class="data-set card">
+            <div class="card-body">
+              <h4 class="card-title">Assets</h4>
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th scope="row" class="upper" class="card-title">
+                      House Land Size
+                    </th>
+                    <td>{{ houseData["house land size"] }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="upper">
+                      Total Paddy Lands(in acre)
+                    </th>
+                    <td>
+                      {{ houseData["total paddy lands of house owner (in acre)"]
+                      }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="upper">Total Vehicles</th>
+                    <td>{{ houseData["total vehicles of house owner"] }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="upper">Total Machineries</th>
+                    <td>{{ houseData["Total Machineries"] }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="data-set card">
+            <div class="card-body">
+              <h4 class="card-title">Housing</h4>
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th scope="row" class="upper">Main Source of Lighting</th>
+                    <td>{{ houseData["electricity"] }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="upper">Type of the Toilet</th>
+                    <td>{{ houseData["toilet"] }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="upper">Main Source of Water</th>
+                    <td>{{ houseData["source of water"] }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-start align-items-start g-2 mt-2"></div>
+        <div class="col min-width-1000">
+            <div class="data-set card">
+                <div class="card-body">
+                    <h4 class="card-title">Remark of the House</h4>
+                    <p>{{ houseData["remark"] }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col p-md-4">
+            <div class="d-flex flex-column">
+                <a
+                  href="{{ url_for('edit_house', house_id=houseData['_id']) }}"
+                  class="btn btn-primary mb-2"
+                  >Edit House</a
+                >
+                <a
+                  href="{{ url_for('delete_house', house_id=houseData['_id']) }}"
+                  class="btn btn-danger"
+                  onclick="return confirm('Are you sure you want to delete this house?')"
+                  >Delete House</a
+                >
+              </div>
+        </div>
+      </div>
+      </div>
+
+
+      {% for person in persons %}
+      <p>{{ person }}</p>
+      {% endfor %} {% for kidData in kidsData %}
+      <p>{{ kidData }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% endblock %}
+</div>
