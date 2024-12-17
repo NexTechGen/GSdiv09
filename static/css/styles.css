@@ -12,3 +12,27 @@
 .min-width-1000 {
   min-width: 200px; /* Set your desired minimum width */
 }
+
+.collapsible-row {
+  cursor: pointer;
+}
+
+.footer {
+  padding-top: 20px; /* Adds space above the footer */
+}
+
+.buttons-container {
+  margin-bottom: 60px; /* Adds space below the buttons */
+}
+
+.dropdown-menu {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: scaleY(0);
+  opacity: 0;
+  transform-origin: top;
+}
+
+.dropdown-menu.show {
+  transform: scaleY(1);
+  opacity: 1;
+}

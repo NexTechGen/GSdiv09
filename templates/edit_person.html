@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container g-0 col-sm-12 col-md-10 col-lg-10 mx-auto">
+    <h2 class="mb-4 text-center" style="padding-top: 10px;">Edit Person Details</h2>
+    <form class="row g-3" method="POST" action="{{ url_for('edit_person', person_id=person['_id']) }}">
+
+        <div class="col-md-6 col-12">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-control" autocomplete="off" value="{{ person['name'] }}" required>
+        </div>
+
+        <div class="col-md-6 col-12">
+            <label for="gender" class="form-label">Gender</label>
+            <select id="gender" name="gender" class="form-control" required>
+                <option value="Male" {% if person['gender'] == 'Male' %}selected{% endif %}>Male</option>
+                <option value="Female" {% if person['gender'] == 'Female' %}selected{% endif %}>Female</option>
+            </select>
+        </div>
+
+        <div class="col-md-6 col-12">
+            <label for="house_number" class="form-label">House Number</label>
+            <input type="text" id="house_number" name="house_number" class="form-control" value="{{ person['house number'] }}" required>
+        </div>
+
+        <div class="col-md-6 col-12">
+            <label for="dob" class="form-label">Date of Birth</label>
+            <input type="date" id="dob" name="dob" class="form-control" value="{{ person['dob'] }}" required>
+        </div>
+
+        <div class="col-md-6 col-12">
+            <label for="nic" class="form-label">NIC</label>
+            <input type="text" id="nic" name="nic" class="form-control" autocomplete="off" value="{{ person['nic'] }}" required>
+        </div>
+
+        <div class="col-md-6 col-12">
+            <label for="education" class="form-label">Education</label>
+            <input type="text" id="education" name="education" class="form-control" autocomplete="off" value="{{ person['education'] }}">
+        </div>
+
+        <div class="col-md-6 col-12">
+            <label for="occupation" class="form-label">Occupation</label>
+            <input type="text" id="occupation" name="occupation" class="form-control" autocomplete="off" value="{{ person['occupation'] }}">
+        </div>
+
+        <div class="col-md-6 col-12">
+            <label for="contact_number" class="form-label">Contact Number</label>
+            <input type="text" id="contact_number" name="contact_number" autocomplete="off" class="form-control" value="{{ person['contact number'] }}">
+        </div>
+
+        <div class="col-md-4 col-12">
+            <label for="government_staff" class="form-label">Government Staff</label>
+            <select id="government_staff" name="government_staff" class="form-control" required>
+                <option value="Yes" {% if person['government staff'] == 'Yes' %}selected{% endif %}>Yes</option>
+                <option value="No" {% if person['government staff'] == 'No' %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="col-md-4 col-12">
+            <label for="pension_num" class="form-label">Pension Num</label>
+            <input type="text" id="pension_num" name="pension_num" class="form-control" autocomplete="off" value="{{ person['pension num'] }}">
+        </div>
+
+        <div class="col-md-4 col-12">
+            <label for="forign" class="form-label">Forign</label>
+            <input type="text" id="forign" name="forign" class="form-control" autocomplete="off" value="{{ person['forign'] }}">
+        </div>
+
+        <div class="col-md-4 col-12">
+            <label for="disable" class="form-label">Disable</label>
+            <select id="disable" name="disable" class="form-control" required>
+                <option value="Yes" {% if person['disable'] == 'Yes' %}selected{% endif %}>Yes</option>
+                <option value="No" {% if person['disable'] == 'No' %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="col-md-4 col-12">
+            <label for="pama" class="form-label">PAMA</label>
+            <input type="text" id="pama" name="pama" class="form-control" autocomplete="off" value="{{ person['pama'] }}">
+        </div>
+
+        <div class="col-md-4 col-12">
+            <label for="kidny" class="form-label">Kidney Issues</label>
+            <select id="kidny" name="kidny" class="form-control" required>
+                <option value="Yes" {% if person['kidny'] == 'Yes' %}selected{% endif %}>Yes</option>
+                <option value="No" {% if person['kidny'] == 'No' %}selected{% endif %}>No</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <label for="cancer" class="form-label">Cancer</label>
+            <select id="cancer" name="cancer" class="form-control" required>
+                <option value="Yes" {% if person['cancer'] == 'Yes' %}selected{% endif %}>Yes</option>
+                <option value="No" {% if person['cancer'] == 'No' %}selected{% endif %}>No</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <label for="samurdhi" class="form-label">Samurdhi</label>
+            <select id="samurdhi" name="samurdhi" class="form-control" required>
+                <option value="Yes" {% if person['samurdhi'] == 'Yes' %}selected{% endif %}>Yes</option>
+                <option value="No" {% if person['samurdhi'] == 'No' %}selected{% endif %}>No</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <label for="aswasuma" class="form-label">ASWASUMA</label>
+            <select id="aswasuma" name="aswasuma" class="form-control" required>
+                <option value="Yes" {% if person['government staff'] == 'Yes' %}selected{% endif %}>Yes</option>
+                <option value="No" {% if person['government staff'] == 'No' %}selected{% endif %}>No</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <label for="widow" class="form-label">Widower or Widow</label>
+            <select id="widow" name="widow" class="form-control" required>
+                <option value="No" {% if person['widow'] == 'No' %}selected{% endif %}>No</option>
+                <option value="Widower" {% if person['widow'] == 'Widower' %}selected{% endif %}>Widower</option>
+                <option value="Widow" {% if person['widow'] == 'Widow' %}selected{% endif %}>Widow</option>
+            </select>
+        </div>
+
+
+        <div class="buttons-container d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a onclick="window.history.back();" class="btn btn-secondary">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}
