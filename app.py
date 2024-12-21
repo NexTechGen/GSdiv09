@@ -312,13 +312,22 @@ def chekeducation(education):
     return "No" if education is None else education
 
 def checkperson(pinNum):
-    return "No" if not pinNum else pinNum
+    if pinNum == "NOT UPDATE" or pinNum == "NO" or pinNum == "No":
+        return "No"
+    else:
+        return "No"
 
 def checkforign(forin):
-    return "No" if not forin else forin
+    if forin == "NOT UPDATE" or forin == "NO" or forin == "No":
+        return "No"
+    else:
+        return "No"
 
 def checkpama(pamaa):
-    return "No" if not pamaa else pamaa
+    if pamaa == "NOT UPDATE" or pamaa == "NO" or pamaa == "No":
+        return "No"
+    else:
+        return "No"
 
 def chekschool(school):
     if school == None or school == "NOT UPDATE" or school == "No":
