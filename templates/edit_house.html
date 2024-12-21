@@ -15,7 +15,7 @@
             <label for="family_type" class="form-label">Family Type</label>
             <select id="family_type" name="family_type" class="form-control" required>
                 {% for option in family_type_options %}
-                    <option value="{{ option }}" {% if house['family type'] == option %}selected{% endif %}>
+                    <option value="{{ option }}" {% if house['family type'] == option|upper %}selected{% endif %}>
                         {{ option }}
                     </option>
                 {% endfor %}
@@ -25,7 +25,7 @@
             <label for="house_type" class="form-label">Type of House</label>
             <select id="house_type" name="house_type" class="form-control" required>
                 {% for option in house_type %}
-                    <option value="{{ option }}" {% if house['type of house'] == option %}selected{% endif %}>
+                    <option value="{{ option }}" {% if house['type of house'] == option|upper %}selected{% endif %}>
                         {{ option }}
                     </option>
                 {% endfor %}
@@ -35,7 +35,7 @@
             <label for="land_size" class="form-label">House Land Size</label>
             <select id="land_size" name="land_size" class="form-control" required>
                 {% for option in land_size %}
-                    <option value="{{ option }}" {% if house['house land size'] == option %}selected{% endif %}>
+                    <option value="{{ option }}" {% if house['house land size'] == option|upper %}selected{% endif %}>
                         {{ option }}
                     </option>
                 {% endfor %}
@@ -71,7 +71,7 @@
             <label for="source_of_water" class="form-label">Source of Water</label>
             <select id="source_of_water" name="source_of_water" class="form-control" required>
                 {% for option in water_source %}
-                    <option value="{{ option }}" {% if house['source of water'] == option %}selected{% endif %}>
+                    <option value="{{ option }}" {% if house['source of water'] == option|upper %}selected{% endif %}>
                         {{ option }}
                     </option>
                 {% endfor %}
@@ -81,7 +81,7 @@
             <label for="electricity" class="form-label">Electricity</label>
             <select id="electricity" name="electricity" class="form-control" required>
                 {% for option in electricity %}
-                    <option value="{{ option }}" {% if house['electricity'] == option %}selected{% endif %}>
+                    <option value="{{ option }}" {% if house['electricity'] == option|upper %}selected{% endif %}>
                         {{ option }}
                     </option>
                 {% endfor %}
@@ -95,7 +95,7 @@
             <label for="toilet" class="form-label">Toilet</label>
             <select id="toilet" name="toilet" class="form-control" required>
                 {% for option in toilet %}
-                    <option value="{{ option }}" {% if house['toilet'] == option %}selected{% endif %}>
+                    <option value="{{ option }}" {% if house['toilet'] == option|upper %}selected{% endif %}>
                         {{ option }}
                     </option>
                 {% endfor %}

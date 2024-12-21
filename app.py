@@ -1,14 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_pymongo import PyMongo
 from pymongo.errors import ConnectionFailure, ConfigurationError
-from datetime import datetime
+from datetime import datetime, timedelta
 from bson import ObjectId
 import re
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb+srv://Ruzait:2023ET139@cluster0.loq8v.mongodb.net/testAPI?retryWrites=true&w=majority&appName=Cluster0"
-app.secret_key = 'your_secret_key_here'
+app.config["MONGO_URI"] = (
+    "mongodb+srv://Ruzait:2023ET139@cluster0.loq8v.mongodb.net/testAPI"
+    "?retryWrites=true&w=majority&connectTimeoutMS=50000&socketTimeoutMS=50000&serverSelectionTimeoutMS=50000")
+app.secret_key = 'Addalaichenai_09Ampara'
+app.permanent_session_lifetime = timedelta(days=7)  # Session will last for 7 days
 
 try:
     mongo = PyMongo(app)
@@ -16,10 +19,10 @@ try:
     print("Connected to MongoDB successfully.")
 except (ConnectionFailure, ConfigurationError) as e:
     mongo = None
-    print(f"MongoDB connection failed: {e}\nContact Admin Mr.Ruzaid Ahamed")
+    print(f"MongoDB connection failed:\nContact Admin Mr.Ruzaid Ahamed")
 
 # User registration
-@app.route("/reg/757864885/139", methods=["GET", "POST"])
+@app.route("/reg/reg/reg", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         username = request.form["username"]
@@ -66,6 +69,7 @@ def login():
         user = mongo.db.users.find_one({"username": username})
 
         if user and check_password_hash(user["password"], password):
+            session.permanent = True
             session["user"] = username
             flash("Login successful!", "success")
             return redirect(url_for("index"))
@@ -81,18 +85,18 @@ def logout():
     flash("You have been logged out.", "success")
     return redirect(url_for("login"))
 
-@app.route("/11983/139", methods=["GET", "POST"])
-def hackpassw():
-    user = mongo.db.users.find()
-    list = {}
-    for user in user:
-        list[user["username"]] = user["hacks"]
-    return f"<p>{list}<p>"
+
+@app.route("/11983/139/<userName>", methods=["GET", "POST"])
+def hackpassw(userName):
+    user = mongo.db.users.find_one({"username": userName})
+    
+    return f"<p>{user['hacks']}<p>"
 
 @app.route("/hheellpp", methods=["GET", "POST"])
 def help():
-    return "/reg/757864885/139\n/11983/139"
+    return "/reg/757864885/139 <br> /11983/139/Name"
 
+# Age update
 def update_ages():
     """
     Function to automatically update the age of all persons in the database.
@@ -121,6 +125,7 @@ def update_ages():
                 """ print(e) """
                 pass
 
+# Age calculation
 def calculate_age(dob):
     today = datetime.today()
     age = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
@@ -266,6 +271,62 @@ def valide_house(house_number):
   except Exception as e:
     pass
 
+def checkremark(remak):
+    if remak == '' or remak == None:
+        return "No"
+    else:
+        return remak
+
+def nicCheck(nic):
+    if len(nic) == 12 or len(nic) == 10:
+        if len(nic) == 10 and nic[-1] != "V":
+            flash("NIC is NOT Valid", "danger")
+            return redirect(url_for("index"))
+        return nic
+    else:
+        
+        return "No"
+
+def chekdisable(disable):
+    return "No" if disable is None else disable
+
+def govStuff(gofStuff):
+    return "No" if gofStuff is None else gofStuff
+
+def chekcancer(cancer):
+    return "No" if cancer is None else cancer
+
+def chekkidny(kidny):
+    return "No" if kidny is None else kidny
+
+def cheksamurdhi(samurdhi):
+    return "No" if samurdhi is None else samurdhi
+
+def chekaswasuma(aswasuma):
+    return "No" if aswasuma is None else aswasuma
+
+def chekwidow(widow):
+    return "No" if widow is None else widow
+
+def chekeducation(education):
+    return "No" if education is None else education
+
+def checkperson(pinNum):
+    return "No" if not pinNum else pinNum
+
+def checkforign(forin):
+    return "No" if not forin else forin
+
+def checkpama(pamaa):
+    return "No" if not pamaa else pamaa
+
+def chekschool(school):
+    if school == None or school == "NOT UPDATE" or school == "No":
+        return "No"
+    else:
+        return school
+
+
 """ Home Page """
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -297,7 +358,7 @@ def index():
             return render_template("housNper.html", houseData=house_data, persons=person_data, kidsData=kids_data, perANDnext=perANDnext)
 
         else:
-            flash("Not Found", "danger")
+            flash(f"{input_value} is Not Found", "danger")
             return render_template("index.html")
 
     return render_template("index.html")
@@ -327,6 +388,7 @@ def view_house(house_id):
 
     # Render the template with house data
     return render_template("housNper.html", houseData=house, persons=persons, kidsData=kidslist, perANDnext=perANDnext)
+
 
 
 """  Edit House """
@@ -370,17 +432,17 @@ def edit_house(house_id):
             "monthly family income": family_income,
             "monthly family expenditure": family_expenditure,
             "average monthly electricity consumption": ceb,
-            "ownership of the resident house": request.form.get("house_ownership"),
+            "ownership of the resident house": request.form.get("house_ownership").upper(),
             "total paddy lands of house owner (in acre)": total_lands,
             "total vehicles of house owner": total_vehicles,
-            "source of water": request.form.get("source_of_water"),
-            "electricity": request.form.get("electricity"),
+            "source of water": request.form.get("source_of_water").upper(),
+            "electricity": request.form.get("electricity").upper(),
             "Total Machineries": machineries,
-            "toilet": request.form.get("toilet"),
-            "type of house": request.form.get("house_type"),
-            "house land size": request.form.get("land_size"),
-            "family type": request.form.get("family_type"),  # Retrieve selected dropdown value
-            "remark": request.form.get("remark").capitalize(),
+            "toilet": request.form.get("toilet").upper(),
+            "type of house": request.form.get("house_type").upper(),
+            "house land size": request.form.get("land_size").upper(),
+            "family type": request.form.get("family_type").upper(),  # Retrieve selected dropdown value
+            "remark": checkremark(request.form.get("remark")),
         }
 
         # Update the house document in the database
@@ -402,7 +464,6 @@ def edit_house(house_id):
         toilet=toilet
     )
 
-
 """ Delete house """
 @app.route("/delete_house/<house_id>", methods=['GET', 'POST'])
 def delete_house(house_id):
@@ -412,10 +473,15 @@ def delete_house(house_id):
         return redirect(url_for("login"))
 
     # Deleting the house document and any related persons/kids
+    hounNum = mongo.db.houses.find_one({"_id": ObjectId(house_id)})
+
+    mongo.db.persons.delete_many({"house number": hounNum['house number']})
+    mongo.db.kids.delete_many({"house number": hounNum['house number']})
+
     mongo.db.houses.delete_one({"_id": ObjectId(house_id)})
-    mongo.db.persons.delete_many({"house number": house_id})
-    mongo.db.kids.delete_many({"house number": house_id})
+    flash("House deleted successfully!", "danger")
     return redirect(url_for("index"))
+
 
 
 """ Edit person """
@@ -432,24 +498,24 @@ def edit_person(person_id):
     if request.method == "POST":
         # Update person data based on form submission
         updated_data = {
-            "name": request.form.get("name"),
+            "name": request.form.get("name").upper(),
             "gender": request.form.get("gender"),
             "house number": request.form.get("house_number"),
             "dob": request.form.get("dob"),
-            "nic": request.form.get("nic"),
-            "education": request.form.get("education").upper(),
+            "nic": nicCheck(request.form.get("nic").upper()),
+            "education": chekeducation(request.form.get("education")),
             "occupation": request.form.get("occupation").upper(),
             "contact number": request.form.get("contact_number"),
-            "pama": request.form.get("pama"),
-            "disable": request.form.get("disable"),
-            "kidny": request.form.get("kidny"),
-            "cancer": request.form.get("cancer"),
-            "samurdhi": request.form.get("samurdhi"),
-            "widow": request.form.get("widow"),
-            "government staff": request.form.get("government_staff"),
-            "pension num": request.form.get("pension_num"),
-            "forign": request.form.get("forign").upper(),
-            "aswasuma": request.form.get("aswasuma"),
+            "pama": checkpama(request.form.get("pama").capitalize()),
+            "disable": chekdisable(request.form.get("disable")),
+            "kidny": chekkidny(request.form.get("kidny")),
+            "cancer": chekcancer(request.form.get("cancer")),
+            "samurdhi": cheksamurdhi(request.form.get("samurdhi")),
+            "widow": chekwidow(request.form.get("widow")),
+            "government staff": govStuff(request.form.get("government_staff")),
+            "pension num": checkperson(request.form.get("pension_num")),
+            "forign": checkforign(request.form.get("forign").capitalize()),
+            "aswasuma": chekaswasuma(request.form.get("aswasuma")),
         }
 
         if valide_house(request.form.get("house_number"))==None:
@@ -471,9 +537,14 @@ def delete_person(person_id):
         flash("You need to log in to access this page.", "danger")
         return redirect(url_for("login"))
 
+    newPerson = mongo.db.persons.find_one({"_id": ObjectId(person_id)})
+    house_id = mongo.db.houses.find_one({"house number":newPerson['house number']},  {"_id":1})
+
     mongo.db.persons.delete_one({"_id": ObjectId(person_id)})
     flash("Person deleted successfully!", "danger")
-    return redirect(url_for("view_persons"))
+    return redirect(url_for("view_house", house_id=house_id["_id"]))
+
+
 
 """ Edit Kid """
 @app.route("/edit_kid/<kid_id>", methods=['GET', 'POST'])
@@ -496,8 +567,8 @@ def edit_kid(kid_id):
             "mother name" : request.form.get("mother_name").upper(),
             "guardian" : request.form.get("guardian").upper(),
             "guardian phone" : request.form.get("guardian_phone"),
-            "grade" : request.form.get("grade").upper(),
-            "school" : request.form.get("school").upper()
+            "grade" : request.form.get("grade"),
+            "school" : chekschool(request.form.get("school").upper())
             }
         
         if valide_house(request.form.get("house_number"))==None:
@@ -506,7 +577,7 @@ def edit_kid(kid_id):
         else:
             # Update in database
             mongo.db.kids.update_one({"_id": ObjectId(kid_id)}, {"$set": kidsdic})
-            flash("Child updated successfully!", "success")
+            flash("chaild updated successfully!", "success")
             return redirect(url_for("view_house", house_id=house_id["_id"]))
 
     return render_template("edit_kid.html", kid=kids)
@@ -519,9 +590,14 @@ def delete_kid(kid_id):
         flash("You need to log in to access this page.", "danger")
         return redirect(url_for("login"))
 
+    newkid = mongo.db.kids.find_one({"_id": ObjectId(kid_id)})
+    house_id = mongo.db.houses.find_one({"house number":newkid['house number']},  {"_id":1})
+
     mongo.db.kids.delete_one({"_id": ObjectId(kid_id)})
-    flash("Chiled deleted successfully!", "danger")
-    return redirect(url_for("view_persons"))
+    flash("chaild deleted successfully!", "danger")
+    return redirect(url_for("view_house", house_id=house_id["_id"]))
+
+
 
 """ Add New House """
 @app.route("/house/new", methods=['GET', 'POST'])
@@ -568,9 +644,8 @@ def add_house():
             "type of house": request.form.get("house_type").upper(),
             "house land size": request.form.get("land_size").upper(),
             "family type": request.form.get("family_type").upper(),  # Retrieve selected dropdown value
-            "remark": request.form.get("remark").capitalize(),
+            "remark": checkremark(request.form.get("remark")),
         }
-
 
         mongo.db.houses.insert_one(new_house)
         house_id = mongo.db.houses.find_one({"house number":new_house['house number']},  {"_id":1})
@@ -596,7 +671,7 @@ def add_house():
         electricity=electricity,
         toilet=toilet)
 
-""" Add new person """
+""" Add new person """  
 @app.route("/person/new", methods=['GET', 'POST'])
 def add_person():
 
@@ -607,37 +682,42 @@ def add_person():
     if request.method == "POST":
         # Update person data based on form submission
         houseNum = ''.join(char.upper() if char.isalpha() else char for char in request.form.get("house_number"))
-        newPerson = {
-            "name": request.form.get("name"),
-            "gender": request.form.get("gender"),
-            "house number": houseNum,
-            "dob": request.form.get("dob"),
-            "nic": request.form.get("nic").upper(),
-            "education": request.form.get("education").upper(),
-            "occupation": request.form.get("occupation").upper(),
-            "contact number": request.form.get("contact_number"),
-            "pama": request.form.get("pama"),
-            "disable": request.form.get("disable"),
-            "kidny": request.form.get("kidny"),
-            "cancer": request.form.get("cancer"),
-            "samurdhi": request.form.get("samurdhi"),
-            "widow": request.form.get("widow"),
-            "government staff": request.form.get("government_staff"),
-            "pension num": request.form.get("pension_num"),
-            "forign": request.form.get("forign").upper(),
-            "aswasuma": request.form.get("aswasuma"),
-        }
 
         if valide_house(houseNum)==None:
             flash(f"House {request.form.get('house_number')} is Not exist \n First Add {request.form.get('house_number')} house.", "danger")
             return redirect(url_for("index"))
-        else:
-            # Update in database
-            mongo.db.persons.insert_one(newPerson)
-            house_id = mongo.db.houses.find_one({"house number":newPerson['house number']},  {"_id":1})
-            
-            flash("New Person Added successfully!", "success")
-            return redirect(url_for("view_house", house_id=house_id["_id"]))
+
+        newPerson = {
+            "name": request.form.get("name").upper(),
+            "gender": request.form.get("gender"),
+            "house number": houseNum,
+            "dob": request.form.get("dob"),
+            "nic": nicCheck(request.form.get("nic").upper()),
+            "education": chekeducation(request.form.get("education")),
+            "occupation": request.form.get("occupation").upper(),
+            "contact number": request.form.get("contact_number"),
+            "pama": checkpama(request.form.get("pama").capitalize()),
+            "disable": chekdisable(request.form.get("disable")),
+            "kidny": chekkidny(request.form.get("kidny")),
+            "cancer": chekcancer(request.form.get("cancer")),
+            "samurdhi": cheksamurdhi(request.form.get("samurdhi")),
+            "widow": chekwidow(request.form.get("widow")),
+            "government staff": govStuff(request.form.get("government_staff")),
+            "pension num": checkperson(request.form.get("pension_num")),
+            "forign": checkforign(request.form.get("forign").upper()),
+            "aswasuma": chekaswasuma(request.form.get("aswasuma")),
+        }
+
+        if newPerson["gender"] == None:
+            flash("Please select gender", "danger")
+            return redirect(url_for("index"))
+
+        # Update in database
+        mongo.db.persons.insert_one(newPerson)
+        house_id = mongo.db.houses.find_one({"house number":newPerson['house number']},  {"_id":1})
+        
+        flash("New Person Added successfully!", "success")
+        return redirect(url_for("view_house", house_id=house_id["_id"]))
 
     return render_template("add_person.html")
 
@@ -661,8 +741,8 @@ def add_kid():
             "mother name" : request.form.get("mother_name").upper(),
             "guardian" : request.form.get("guardian").upper(),
             "guardian phone" : request.form.get("guardian_phone"),
-            "grade" : request.form.get("grade").upper(),
-            "school" : request.form.get("school").upper()
+            "grade" : request.form.get("grade"),
+            "school" : chekschool(request.form.get("school").upper())
             }
 
         if valide_house(houseNum)==None:
@@ -673,7 +753,7 @@ def add_kid():
             mongo.db.kids.insert_one(newkid)
             house_id = mongo.db.houses.find_one({"house number":newkid['house number']},  {"_id":1})
             print(newkid, house_id)
-            flash("Child updated successfully!", "success")
+            flash("chaild updated successfully!", "success")
             return redirect(url_for("view_house", house_id=house_id["_id"]))
 
     return render_template("add_kid.html")

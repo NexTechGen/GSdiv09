@@ -14,7 +14,7 @@
         <div class="col-md-3 col-12">
             <label for="family_type" class="form-label">Family Type</label>
             <select id="family_type" name="family_type" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Family Type</option>
+                <option value="" disabled selected hidden>Select Family Type</option>
                 {% for option in family_type_options %}
                     <option value="{{ option }}">
                         {{ option }}
@@ -25,7 +25,7 @@
         <div class="col-md-3 col-12">
             <label for="house_type" class="form-label">Type of House</label>
             <select id="house_type" name="house_type" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Type of House</option>
+                <option value="" disabled selected hidden>Select House Type</option>
                 {% for option in house_type %}
                     <option value="{{ option }}" >
                         {{ option }}
@@ -36,7 +36,7 @@
         <div class="col-md-4 col-12">
             <label for="land_size" class="form-label">House Land Size</label>
             <select id="land_size" name="land_size" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>House Land Size</option>
+                <option value="" disabled selected hidden>Select Size of House Land</option>
                 {% for option in land_size %}
                     <option value="{{ option }}">
                         {{ option }}
@@ -60,7 +60,7 @@
         </div>
         <div class="col-md-4 col-12">
             <label for="house_ownership" class="form-label">Ownership of the Resident House</label>
-            <input type="text" id="house_ownership" name="house_ownership" autocomplete="off" class="form-control" placeholder="NOT UPDATE" required>
+            <input type="text" id="house_ownership" name="house_ownership" autocomplete="off" class="form-control" placeholder="Owner Name" required>
         </div>
         <div class="col-md-4 col-12">
             <label for="total_vehicles" class="form-label">Number of Vehicles in the House</label>
@@ -73,7 +73,7 @@
         <div class="col-md-3 col-12">
             <label for="source_of_water" class="form-label">Source of Water</label>
             <select id="source_of_water" name="source_of_water" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Source of Water</option>
+                <option value="" disabled selected hidden>Water Source for House</option>
                 {% for option in water_source %}
                     <option value="{{ option }}">
                         {{ option }}
@@ -84,7 +84,7 @@
         <div class="col-md-3 col-12">
             <label for="electricity" class="form-label">Electricity</label>
             <select id="electricity" name="electricity" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Electricity</option>
+                <option value="" disabled selected hidden>Select Electricity for House</option>
                 {% for option in electricity %}
                     <option value="{{ option }}">
                         {{ option }}
@@ -99,7 +99,7 @@
         <div class="col-md-3 col-12">
             <label for="toilet" class="form-label">Toilet</label>
             <select id="toilet" name="toilet" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Toilet</option>
+                <option value="" disabled selected hidden>Select type of Toilet</option>
                 {% for option in toilet %}
                     <option value="{{ option }}" >
                         {{ option }}

@@ -11,15 +11,18 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/styles.css') }}"
     />
     <link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-/>
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
       rel="stylesheet"
@@ -42,14 +45,21 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse animate__animated animate__fadeIn" id="navbarNav">
+        <div
+          class="collapse navbar-collapse animate__animated animate__fadeIn"
+          id="navbarNav"
+        >
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{{ url_for('index') }}"
+              >
                 <i class="bi bi-search"></i> Home
               </a>
             </li>
-            
+
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -61,7 +71,10 @@
               >
                 <i class="bi bi-person-add"></i> Add New
               </a>
-              <ul class="dropdown-menu animate__animated animate__fadeIn" aria-labelledby="navbarDropdown">
+              <ul
+                class="dropdown-menu animate__animated animate__fadeIn"
+                aria-labelledby="navbarDropdown"
+              >
                 <li>
                   <a class="dropdown-item" href="{{ url_for('add_person') }}">
                     <i class="bi bi-person-plus"></i> Add New Person
@@ -69,7 +82,7 @@
                 </li>
                 <li>
                   <a class="dropdown-item" href="{{ url_for('add_kid') }}">
-                    <i class="bi bi-person-plus"></i> Add New Kid
+                    <i class="bi bi-person-plus"></i> Add New chaild
                   </a>
                 </li>
               </ul>
@@ -88,8 +101,6 @@
         </div>
       </div>
     </nav>
-    
-    
 
     <!-- Flash Messages -->
     <div class="container my-4">
@@ -124,11 +135,13 @@
     </div>
 
     <!-- Footer -->
-    <div class="bg-light py-2 fixed-bottom footer" style="margin-top: 40px">
+    <footer class="bg-light py-3 fixed-bottom border-top">
       <div class="container text-center">
-        <span class="text-muted">&copy; 2024 Area Management System</span>
+        <small class="text-muted"
+          >Area Management System &copy; 2024. All rights reserved.</small
+        >
       </div>
-    </div>
+    </footer>
 
     <script>
       // Automatically hide flash messages after 2 seconds
@@ -153,6 +166,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-
   </body>
 </html>

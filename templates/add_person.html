@@ -14,7 +14,7 @@
         <div class="col-md-6 col-12">
             <label for="gender" class="form-label">Gender</label>
             <select id="gender" name="gender" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Gender</option>
+                <option value="" disabled selected hidden>Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
@@ -37,54 +37,65 @@
 
         <div class="col-md-6 col-12">
             <label for="education" class="form-label">Education</label>
-            <input type="text" id="education" name="education" class="form-control" autocomplete="off" value="NOT UPDATE">
+            <select id="education" name="education" class="form-control" required>
+                <option value="" disabled selected hidden>Select Education</option>
+                {% for grade in range(1, 11) %}
+                <option value="Grade {{ grade }}">Grade {{ grade }}</option>
+                {% endfor%}
+                <option value="GCE O/L">GCE O/L</option>
+                <option value="GCE A/L">GCE A/L</option>
+                <option value="Deploma">Deploma</option>
+                <option value="Degree">Degree</option>
+                <option value="Master's Degree">Master's Degree</option>
+                <option value="Doctorate (PhD)">Doctorate (PhD)</option>
+            </select>
         </div>
 
         <div class="col-md-6 col-12">
             <label for="occupation" class="form-label">Occupation</label>
-            <input type="text" id="occupation" name="occupation" class="form-control" autocomplete="off" value="NOT UPDATE">
+            <input type="text" id="occupation" name="occupation" class="form-control" autocomplete="off" placeholder="Occupation" required>
         </div>
 
         <div class="col-md-6 col-12">
             <label for="contact_number" class="form-label">Contact Number</label>
-            <input type="text" id="contact_number" name="contact_number" autocomplete="off" class="form-control" value="NOT UPDATE">
+            <input type="text" id="contact_number" name="contact_number" autocomplete="off" class="form-control" placeholder="Contact Number" required>
         </div>
 
         <div class="col-md-4 col-12">
             <label for="government_staff" class="form-label">Government Staff</label>
             <select id="government_staff" name="government_staff" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Government Staff</option>
+                <option value="" disabled selected hidden>Government Staff</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
         </div>
         <div class="col-md-4 col-12">
             <label for="pension_num" class="form-label">Pension Num</label>
-            <input type="text" id="pension_num" name="pension_num" class="form-control" autocomplete="off" value="NOT UPDATE">
+            <input type="text" id="pension_num" name="pension_num" class="form-control" autocomplete="off" placeholder="If Pension" >
         </div>
 
         <div class="col-md-4 col-12">
             <label for="forign" class="form-label">Forign</label>
-            <input type="text" id="forign" name="forign" class="form-control" autocomplete="off" value="NOT UPDATE">
+            <input type="text" id="forign" name="forign" class="form-control" autocomplete="off" placeholder="If Forign">
         </div>
 
         <div class="col-md-4 col-12">
             <label for="disable" class="form-label">Disable</label>
             <select id="disable" name="disable" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Disable</option>
+                <option value="" disabled selected hidden>Disable</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
         </div>
         <div class="col-md-4 col-12">
             <label for="pama" class="form-label">PAMA</label>
-            <input type="text" id="pama" name="pama" class="form-control" autocomplete="off" value="NOT UPDATE">
+            <input type="text" id="pama" name="pama" class="form-control" autocomplete="off" placeholder="If PAMA">
         </div>
 
         <div class="col-md-4 col-12">
             <label for="kidny" class="form-label">Kidney Issues</label>
             <select id="kidny" name="kidny" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Kidney Issues</option>
+                <option value="" disabled selected hidden>Kidney Issues</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
@@ -93,7 +104,7 @@
         <div class="col-md-3 col-12">
             <label for="cancer" class="form-label">Cancer</label>
             <select id="cancer" name="cancer" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Cancer</option>
+                <option value="" disabled selected hidden>Cancer</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
@@ -102,7 +113,7 @@
         <div class="col-md-3 col-12">
             <label for="samurdhi" class="form-label">Samurdhi</label>
             <select id="samurdhi" name="samurdhi" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Samurdhi</option>
+                <option value="" disabled selected hidden>Samurdhi</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
@@ -111,7 +122,7 @@
         <div class="col-md-3 col-12">
             <label for="aswasuma" class="form-label">ASWASUMA</label>
             <select id="aswasuma" name="aswasuma" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>ASWASUMA</option>
+                <option value="" disabled selected hidden>ASWASUMA</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
@@ -120,7 +131,7 @@
         <div class="col-md-3 col-12">
             <label for="widow" class="form-label">Widower or Widow</label>
             <select id="widow" name="widow" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Widower or Widow</option>
+                <option value="" disabled selected hidden>Widower or Widow</option>
                 <option value="No">No</option>
                 <option value="Widower">Widower</option>
                 <option value="Widow">Widow</option>

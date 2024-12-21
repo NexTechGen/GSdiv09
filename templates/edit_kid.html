@@ -51,7 +51,16 @@
 
         <div class="col-md-6 col-12">
             <label for="grade" class="form-label">Grade</label>
-            <input type="text" id="grade" name="grade" class="form-control" autocomplete="off" value="{{ kid['grade'] }}">
+            <select id="grade" name="grade" class="form-control" required>
+                <option value="" disabled selected hidden>Select Education</option>
+                {% for grade in range(1, 11) %}
+                <option value="Grade {{ grade }}" {% if kid['grade'] == "Grade " + grade|string %}selected{% endif %}>
+                    Grade {{ grade }}
+                </option>
+                {% endfor %}
+                <option value="GCE O/L" {% if kid['grade'] == "GCE O/L" %}selected{% endif %}>GCE O/L</option>
+                <option value="GCE A/L" {% if kid['grade'] == "GCE A/L" %}selected{% endif %}>GCE A/L</option>
+                </select>
         </div>
 
         <div class="col-md-6 col-12">

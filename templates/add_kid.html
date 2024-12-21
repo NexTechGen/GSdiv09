@@ -14,7 +14,7 @@
         <div class="col-md-6 col-12">
             <label for="gender" class="form-label">Gender</label>
             <select id="gender" name="gender" class="form-control" required>
-                <option value="NOT UPDATE" selected disabled>Gender</option>
+                <option value="" disabled selected hidden>Select Gender</option>
                 <option value="Male" >Male</option>
                 <option value="Female" >Female</option>
             </select>
@@ -22,7 +22,7 @@
 
         <div class="col-md-6 col-12">
             <label for="house_number" class="form-label">House Number</label>
-            <input type="text" id="house_number" name="house_number" class="form-control" placeholder="House Number" required>
+            <input type="text" id="house_number" name="house_number" class="form-control" placeholder="House Number" autocomplete="off" required>
         </div>
 
         <div class="col-md-6 col-12">
@@ -52,7 +52,15 @@
 
         <div class="col-md-6 col-12">
             <label for="grade" class="form-label">Grade</label>
-            <input type="text" id="grade" name="grade" class="form-control" autocomplete="off" value="NOT UPDATE">
+            <select id="grade" name="grade" class="form-control">
+                <option value="" disabled selected hidden>Select Education</option>
+                <option value="No">Not Study</option>
+                {% for grade in range(1, 11) %}
+                <option value="Grade {{ grade }}">Grade {{ grade }}</option>
+                {% endfor%}
+                <option value="GCE O/L">GCE O/L</option>
+                <option value="GCE A/L">GCE A/L</option>
+            </select>
         </div>
 
         <div class="col-md-6 col-12">

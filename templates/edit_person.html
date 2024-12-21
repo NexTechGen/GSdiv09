@@ -21,7 +21,7 @@
 
         <div class="col-md-6 col-12">
             <label for="house_number" class="form-label">House Number</label>
-            <input type="text" id="house_number" name="house_number" class="form-control" value="{{ person['house number'] }}" required>
+            <input type="text" id="house_number" name="house_number" class="form-control" autocomplete="off" value="{{ person['house number'] }}" required>
         </div>
 
         <div class="col-md-6 col-12">
@@ -36,8 +36,22 @@
 
         <div class="col-md-6 col-12">
             <label for="education" class="form-label">Education</label>
-            <input type="text" id="education" name="education" class="form-control" autocomplete="off" value="{{ person['education'] }}">
+            <select id="education" name="education" class="form-control" required>
+                <option value="" disabled selected hidden>Select Education</option>
+                {% for grade in range(1, 11) %}
+                <option value="Grade {{ grade }}" {% if person['education'] == "Grade " + grade|string %}selected{% endif %}>
+                    Grade {{ grade }}
+                </option>
+                {% endfor %}
+                <option value="GCE O/L" {% if person['education'] == "GCE O/L" %}selected{% endif %}>GCE O/L</option>
+                <option value="GCE A/L" {% if person['education'] == "GCE A/L" %}selected{% endif %}>GCE A/L</option>
+                <option value="Deploma" {% if person['education'] == "Deploma" %}selected{% endif %}>Deploma</option>
+                <option value="Degree" {% if person['education'] == "Degree" %}selected{% endif %}>Degree</option>
+                <option value="Master's Degree" {% if person['education'] == "Master's Degree" %}selected{% endif %}>Master's Degree</option>
+                <option value="Doctorate (PhD)" {% if person['education'] == "Doctorate (PhD)" %}selected{% endif %}>Doctorate (PhD)</option>
+            </select>
         </div>
+        
 
         <div class="col-md-6 col-12">
             <label for="occupation" class="form-label">Occupation</label>
@@ -122,7 +136,7 @@
 
         <div class="buttons-container d-flex justify-content-between mt-4">
             <button type="submit" class="btn btn-primary">Save Changes</button>
-            <a onclick="window.history.back();" class="btn btn-secondary">Cancel</a>
+            <a onclick="goBack()" class="btn btn-secondary">Cancel</a>
         </div>
 
     </form>
