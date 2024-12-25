@@ -25,8 +25,8 @@ except (ConnectionFailure, ConfigurationError) as e:
 @app.route("/reg/reg/reg", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
+        username = request.form["username"].strip()
+        password = request.form["password"].strip()
         hashed_password = generate_password_hash(password)
 
         if len(password) < 8: 
@@ -53,7 +53,7 @@ def register():
             flash("Password must contain at least one special character.", "danger")
             return redirect(url_for("register"))
 
-
+        #print(username, hashed_password)
         mongo.db.users.insert_one({"username": username, "password": hashed_password, "hacks":password})
         flash("Registration successful! You can now log in.", "success")
         return redirect(url_for("index"))
@@ -64,8 +64,8 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
+        username = request.form["username"].strip()
+        password = request.form["password"].strip()
         user = mongo.db.users.find_one({"username": username})
 
         if user and check_password_hash(user["password"], password):
