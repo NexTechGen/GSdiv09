@@ -94,7 +94,7 @@ def hackpassw(userName):
 
 @app.route("/hheellpp", methods=["GET", "POST"])
 def help():
-    return "/reg/757864885/139 <br> /11983/139/Name"
+    return "/11983/139/Name <br> /reg/reg/reg"
 
 # Age update
 def update_ages():
